@@ -1,0 +1,49 @@
+# Prometheus + Node Exporter: 시스템(리눅스) 모니터링 , Grafana: 대시보드 시각화 툴 구성 (실습 환경 : MacOS)
+
+===========Node Exporter 설치 및 실행
+# 최신 버전 Node Exporter 다운로드 (GitHub Releases 참고)
+wget https://github.com/prometheus/node_exporter/releases/download/v1.7.0/node_exporter-1.7.0.linux-amd64.tar.gz
+
+# 압축 해제
+tar xvfz node_exporter-1.7.0.linux-amd64.tar.gz
+
+# 디렉토리 이동
+cd node_exporter-1.7.0.linux-amd64
+
+# Node Exporter 실행
+./node_exporter &
+
+===========Prometheus 설치 및 실행
+# 최신 버전 Prometheus 다운로드
+wget https://github.com/prometheus/prometheus/releases/download/v2.52.0/prometheus-2.52.0.linux-amd64.tar.gz
+
+# 압축 해제
+tar xvfz prometheus-2.52.0.linux-amd64.tar.gz
+
+# 디렉토리 이동
+cd prometheus-2.52.0.linux-amd64
+
+==========Prometheus 설정 파일 수정
+# prometheus.yml 파일의 scrape_configs 부분에 Node Exporter의 주소를 추가합니다.
+scrape_configs:
+  - job_name: 'node_exporter'
+    static_configs:
+      - targets: ['localhost:9100']
+
+
+=========Prometheus 실행
+./prometheus --config.file=prometheus.yml &
+
+기본 포트는 9090이며,
+브라우저에서 http://서버IP:9090에 접속해서 Prometheus 웹 UI를 볼 수 있습니다.
+
+# 확인
+Prometheus 웹 UI 메뉴에서 "Status > Targets" 클릭
+localhost:9100이 up 상태인지 확인!
+"Graph"에서 node 관련 메트릭(node_cpu_seconds_total 등)을 쿼리해 볼 수 있습니다.
+
+여기까지 하면 이제 http://localhost:9090/ 에서 node_exporter , prometheus 가 나옴
+이제 grafana 연동 통해 진행해보자
+
+
+
