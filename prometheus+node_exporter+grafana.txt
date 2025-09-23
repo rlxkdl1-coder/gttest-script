@@ -45,5 +45,6 @@ localhost:9100이 up 상태인지 확인!
 여기까지 하면 이제 http://localhost:9090/ 에서 node_exporter , prometheus 가 나옴
 이제 grafana 연동 통해 진행해보자
 
+$ grafana server --homepath /opt/homebrew/opt/grafana/share/grafana
 
 
