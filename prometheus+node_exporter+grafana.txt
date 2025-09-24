@@ -45,6 +45,27 @@ localhost:9100이 up 상태인지 확인!
 여기까지 하면 이제 http://localhost:9090/ 에서 node_exporter , prometheus 가 나옴
 이제 grafana 연동 통해 진행해보자
 
+# grafana 실행
 $ grafana server --homepath /opt/homebrew/opt/grafana/share/grafana
+
+logger=server t=... level=info msg="HTTP Server Listen" ...
+와 유사한 메시지가 보이면 정상적으로 실행된 것입니다.
+기본적으로 http://localhost:3000에서 접근할 수 있습니다.
+
+기본 아이디: admin
+기본 비밀번호: admin
+최초 로그인 시, 비밀번호를 변경하라는 안내가 나오면 새로운 비밀번호로 변경합니다.
+
+Grafana는 시계열 데이터(Data Source)와 연동해서 대시보드를 만듭니다.
+
+사이드바에서 “Configuration(톱니바퀴) > Data sources” 클릭
+Add data source 클릭
+원하는 데이터베이스(예: Prometheus, MySQL, Elasticsearch 등) 선택 후 연결 정보 입력
+5. 대시보드 만들기
+왼쪽 메뉴에서 “+” 버튼 클릭 → “Dashboard” 선택
+“Add new panel” 클릭
+쿼리 설정 및 그래프 시각화
+
+
 
 
